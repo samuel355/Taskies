@@ -5,19 +5,11 @@
  * @format
  */
 
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import { COLORS } from './src/constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Toast from 'react-native-toast-message';
-import AppNavigator from './src/navigation/AppNavigator';
 
 // Create a query client
 const queryClient = new QueryClient({
@@ -35,21 +27,15 @@ function App() {
   return (
     <GestureHandlerRootView style={styles.container}>
       <QueryClientProvider client={queryClient}>
-        <SafeAreaProvider>
-          <StatusBar
-            translucent={false}
-            backgroundColor={COLORS.white}
-            barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          />
-
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Hello Wolrd</Text>
-          </View>
-
-          <AppNavigator />
-          <Toast />
-        </SafeAreaProvider>
+      <SafeAreaProvider>
+        <StatusBar
+          translucent={false}
+          backgroundColor={COLORS.white}
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        />
+      </SafeAreaProvider>
       </QueryClientProvider>
+      
     </GestureHandlerRootView>
   );
 }

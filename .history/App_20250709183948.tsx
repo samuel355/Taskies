@@ -41,9 +41,9 @@ function App() {
             backgroundColor={COLORS.white}
             barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           />
-
+          
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Hello Wolrd</Text>
+            <Text>Hello</Text>
           </View>
 
           <AppNavigator />

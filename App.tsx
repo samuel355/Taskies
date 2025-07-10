@@ -8,9 +8,7 @@
 import {
   StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
-  View,
+  useColorScheme
 } from 'react-native';
 import { COLORS } from './src/constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -41,11 +39,6 @@ function App() {
             backgroundColor={COLORS.white}
             barStyle={isDarkMode ? 'light-content' : 'dark-content'}
           />
-
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Hello Wolrd</Text>
-          </View>
-
           <AppNavigator />
           <Toast />
         </SafeAreaProvider>

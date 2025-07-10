@@ -56,6 +56,11 @@ export const useProjectStore = create<ProjectStore>()(
 
       createProject: async (projectData) => {
         set({ isLoading: true, error: null });
+        // Ensure ownerId is present
+        if (!(projectData as any).ownerId) {
+          set({ isLoading: false, error: 'ownerId is required and must be a valid user ID.' });
+          return { success: false, error: 'ownerId is required and must be a valid user ID.' };
+        }
         try {
           const insertData = {
             ...projectData,
@@ -65,14 +70,19 @@ export const useProjectStore = create<ProjectStore>()(
             deadline: projectData.deadline ?? undefined,
             budget: projectData.budget ?? undefined,
           };
-          delete (insertData as any).ownerId;
+          console.log(projectData);
+          
+          //delete (insertData as any).ownerId;
+          //delete (insertData as any).members;
           const { data, error } = await supabase
             .from('projects')
             .insert([insertData])
             .select()
             .single();
-
+            console.log('data',data);
+            console.log('error  ->', error);
           if (error || !data) {
+
             set({ isLoading: false, error: error?.message || 'Failed to create project' });
             return { success: false, error: error?.message || 'Failed to create project' };
           }
@@ -118,6 +128,7 @@ export const useProjectStore = create<ProjectStore>()(
             budget: updates.budget ?? undefined,
           };
           delete (updateData as any).ownerId;
+          delete (updateData as any).members;
           const { data, error } = await supabase
             .from('projects')
             .update(updateData)

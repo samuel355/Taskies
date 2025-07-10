@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MMKV } from 'react-native-mmkv';
-import { auth } from '../services/supabase';
+import { supabase, auth } from '../services/supabase';
 import { User, AuthState } from '../types';
 import { STORAGE_KEYS } from '../constants';
 
@@ -90,6 +90,17 @@ export const useAuthStore = create<AuthStore>()(
             role: data.user.user_metadata?.role || 'member',
           };
 
+          // Upsert user into users table
+          await supabase.from('users').upsert({
+            id: user.id || '',
+            email: user.email || '',
+            first_name: user.firstName || '',
+            last_name: user.lastName || '',
+            avatar: user.avatar ?? null,
+            is_active: true,
+            role: user.role,
+          });
+
           set({
             user,
             token: data.session.access_token,
@@ -119,6 +130,17 @@ export const useAuthStore = create<AuthStore>()(
               error: error?.message || 'Sign up failed',
             };
           }
+
+          // Upsert user into users table
+          await supabase.from('users').upsert({
+            id: data.user.id || '',
+            email: data.user.email || '',
+            first_name: firstName || '',
+            last_name: lastName || '',
+            avatar: data.user.user_metadata?.avatar || null,
+            is_active: true,
+            role: data.user.user_metadata?.role || 'member',
+          });
 
           return { success: true };
         } catch (error: any) {

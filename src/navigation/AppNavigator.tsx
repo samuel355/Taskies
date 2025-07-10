@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RootStackParamList, TabParamList } from '../types';
 import { AuthScreen, CalendarScreen, CreateProjectScreen, CreateTaskScreen, DashboardScreen, EditTaskScreen, FileViewerScreen, NotificationsScreen, ProfileScreen, ProjectDetailsScreen, ProjectsScreen, SettingsScreen, TaskDetailsScreen, TasksScreen, TeamMembersScreen } from '../screens';
+import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import { NavigationContainer } from '@react-navigation/native';
 
 // Place TabIcon here, before TabNavigator
@@ -235,6 +236,7 @@ const AuthStackNavigator = () => {
       }}
     >
       <Stack.Screen name="Auth" component={AuthScreen} />
+      <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} options={{ headerShown: true, title: 'Reset Password' }} />
     </Stack.Navigator>
   );
 };

@@ -157,6 +157,7 @@ export type RootStackParamList = {
   Notifications: undefined;
   TeamMembers: { projectId: string };
   FileViewer: { fileUrl: string; fileName: string };
+  ForgotPasswordScreen: undefined;
 };
 
 export type TabParamList = {

@@ -15,6 +15,7 @@ import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Card from '../components/ui/Card';
 import { isValidEmail} from '../utils';
+import { useNavigation } from '@react-navigation/native';
 
 const AuthScreen = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -36,6 +37,7 @@ const AuthScreen = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { signIn, signUp, isLoading } = useAuthStore();
+  const navigation = useNavigation();
 
   const validateForm = () => {
     const newErrors = {
@@ -249,7 +251,7 @@ const AuthScreen = () => {
       />
 
       {!isSignUp && (
-        <TouchableOpacity style={styles.forgotPassword}>
+        <TouchableOpacity style={styles.forgotPassword} onPress={() => (navigation as any).navigate('ForgotPasswordScreen')}>
           <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
         </TouchableOpacity>
       )}
@@ -365,6 +367,59 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.base,
     color: COLORS.primary,
     fontWeight: '600',
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+  modalContainer: {
+    backgroundColor: COLORS.white,
+    padding: SPACING.xl,
+    borderRadius: SPACING.md,
+    width: '85%',
+  },
+  modalTitle: {
+    fontSize: FONT_SIZES.lg,
+    fontWeight: 'bold',
+    color: COLORS.textPrimary,
+    marginBottom: SPACING.sm,
+  },
+  modalDescription: {
+    fontSize: FONT_SIZES.base,
+    color: COLORS.textSecondary,
+    marginBottom: SPACING.md,
+  },
+  modalInput: {
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderRadius: SPACING.sm,
+    padding: SPACING.md,
+    marginBottom: SPACING.sm,
+    fontSize: FONT_SIZES.base,
+    color: COLORS.textPrimary,
+    backgroundColor: COLORS.background,
+  },
+  modalError: {
+    color: COLORS.error,
+    fontSize: FONT_SIZES.sm,
+    marginBottom: SPACING.sm,
+  },
+  modalActions: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    gap: SPACING.md,
+  },
+  modalActionTextPrimary: {
+    color: COLORS.primary,
+    fontWeight: '600',
+    fontSize: FONT_SIZES.base,
+  },
+  modalActionTextSecondary: {
+    color: COLORS.textSecondary,
+    fontWeight: '600',
+    fontSize: FONT_SIZES.base,
   },
 });
 

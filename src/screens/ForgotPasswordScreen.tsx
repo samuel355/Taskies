@@ -21,7 +21,7 @@ const ForgotPasswordScreen = ({ navigation }: any) => {
 
   const handleReset = async () => {
     if (!email) {
-      setError('Email is required');
+      setError('Enter your Email Address');
       return;
     }
     if (!isValidEmail(email)) {

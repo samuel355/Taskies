@@ -7,57 +7,23 @@ import { RootStackParamList, TabParamList } from '../types';
 import { AuthScreen, CalendarScreen, CreateProjectScreen, CreateTaskScreen, DashboardScreen, EditTaskScreen, FileViewerScreen, NotificationsScreen, ProfileScreen, ProjectDetailsScreen, ProjectsScreen, SettingsScreen, TaskDetailsScreen, TasksScreen, TeamMembersScreen } from '../screens';
 import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import { NavigationContainer } from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-// Place TabIcon here, before TabNavigator
-const TabIcon = ({
-  name,
-  color,
-  size,
-}: {
-  name: string;
-  color: string;
-  size: number;
-}) => (
-  <View
-    style={[
-      styles.tabIcon,
-      {
-        backgroundColor: color,
-        width: size,
-        height: size,
-        borderRadius: size / 2,
-      },
-    ]}
-  >
-    <Text style={[styles.tabIconText, { color: COLORS.white }]}>
-      {name.charAt(0).toUpperCase()}
-    </Text>
-  </View>
-);
-
-// Define this outside TabNavigator
+// Icon renderers for each tab (move these outside TabNavigator)
 const renderDashboardIcon = ({ color, size }: { color: string; size: number }) => (
-  <TabIcon name="dashboard" color={color} size={size} />
+  <MaterialIcons name="dashboard" color={color} size={size} />
 );
-
-// Add this at the top level, outside TabNavigator
 const renderProjectsIcon = ({ color, size }: { color: string; size: number }) => (
-  <TabIcon name="projects" color={color} size={size} />
+  <MaterialIcons name="folder-open" color={color} size={size} />
 );
-
-// At the top level, outside TabNavigator
 const renderTasksIcon = ({ color, size }: { color: string; size: number }) => (
-  <TabIcon name="tasks" color={color} size={size} />
+  <MaterialIcons name="check-circle" color={color} size={size} />
 );
-
-// At the top level, outside TabNavigator
 const renderCalendarIcon = ({ color, size }: { color: string; size: number }) => (
-  <TabIcon name="calendar" color={color} size={size} />
+  <MaterialIcons name="calendar-today" color={color} size={size} />
 );
-
-// At the top level, outside TabNavigator
 const renderProfileIcon = ({ color, size }: { color: string; size: number }) => (
-  <TabIcon name="profile" color={color} size={size} />
+  <MaterialIcons name="person" color={color} size={size} />
 );
 
 // Create navigators
@@ -268,14 +234,6 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: FONT_SIZES.lg,
     color: COLORS.textPrimary,
-    fontWeight: '600',
-  },
-  tabIcon: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tabIconText: {
-    fontSize: FONT_SIZES.xs,
     fontWeight: '600',
   },
 });

@@ -156,7 +156,7 @@ const CreateProjectScreen = () => {
             required
           />
 
-          <TouchableOpacity onPress={() => setShowDatePicker(true)} style={{ marginBottom: 16 }}>
+          <TouchableOpacity onPress={() => setShowDatePicker(true)} style={styles.datePickerTouchable}>
             <Input
               label="Deadline (YYYY-MM-DD)"
               value={formData.deadline}
@@ -247,6 +247,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: SPACING.lg,
     paddingHorizontal: SPACING.lg,
+  },
+  datePickerTouchable: {
+    marginBottom: 16,
   },
 });
 

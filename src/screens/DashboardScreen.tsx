@@ -393,7 +393,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: SPACING.xl,
+    paddingBottom: SPACING['2xl'],
   },
   statsGrid: {
     flexDirection: 'row',
@@ -453,6 +453,7 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.lg,
     fontWeight: 'bold',
     color: COLORS.textPrimary,
+    paddingHorizontal: SPACING.lg,
   },
   sectionLink: {
     fontSize: FONT_SIZES.sm,
@@ -463,6 +464,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: SPACING.lg,
     gap: SPACING.md,
+    marginTop: 12
   },
   quickAction: {
     flex: 1,

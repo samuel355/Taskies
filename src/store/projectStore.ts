@@ -55,7 +55,6 @@ export const useProjectStore = create<ProjectStore>()(
       error: null,
 
       createProject: async (projectData) => {
-        console.log('project data ->', projectData);
         
         set({ isLoading: true, error: null });
         // Ensure ownerId is present
@@ -76,6 +75,7 @@ export const useProjectStore = create<ProjectStore>()(
           
           //delete (insertData as any).ownerId;
           //delete (insertData as any).members;
+          console.log(insertData);
           const { data, error } = await supabase
             .from('projects')
             .insert([insertData])

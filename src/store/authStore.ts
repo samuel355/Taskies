@@ -77,6 +77,7 @@ export const useAuthStore = create<AuthStore>()(
               error: error?.message || 'Sign in failed',
             };
           }
+          console.log(data)
 
           const user: User = {
             id: data.user.id,

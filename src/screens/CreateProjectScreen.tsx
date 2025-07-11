@@ -17,6 +17,7 @@ import { CreateProjectForm } from '../types';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Card from '../components/ui/Card';
+import DateTimePicker from '@react-native-community/datetimepicker';
 //import { isValidEmail } from '../utils';
 
 const CreateProjectScreen = () => {
@@ -43,6 +44,8 @@ const CreateProjectScreen = () => {
     icon: '',
     deadline: '',
   });
+
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const validateForm = () => {
     const newErrors = {
@@ -153,13 +156,30 @@ const CreateProjectScreen = () => {
             required
           />
 
-          <Input
-            label="Deadline (YYYY-MM-DD)"
-            value={formData.deadline}
-            onChangeText={value => handleInputChange('deadline', value)}
-            error={errors.deadline}
-            placeholder="Optional"
-          />
+          <TouchableOpacity onPress={() => setShowDatePicker(true)} style={{ marginBottom: 16 }}>
+            <Input
+              label="Deadline (YYYY-MM-DD)"
+              value={formData.deadline}
+              editable={false}
+              pointerEvents="none"
+              placeholder="Select deadline (optional)"
+              error={errors.deadline}
+            />
+          </TouchableOpacity>
+          {showDatePicker && (
+            <DateTimePicker
+              value={formData.deadline ? new Date(formData.deadline) : new Date()}
+              mode="date"
+              //display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+              onChange={(event, selectedDate) => {
+                setShowDatePicker(false);
+                if (event.type === 'set' && selectedDate) {
+                  handleInputChange('deadline', selectedDate.toISOString().slice(0, 10));
+                }
+              }}
+              minimumDate={new Date()}
+            />
+          )}
 
           <Input
             label="Budget"

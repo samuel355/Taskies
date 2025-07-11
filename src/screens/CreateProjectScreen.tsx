@@ -81,7 +81,7 @@ const CreateProjectScreen = () => {
     try {
       const projectData: Omit<import('../types').Project, 'id' | 'createdAt' | 'updatedAt' | 'members'> = {
         ...formData,
-        ownerId: user.id,
+        owner_id: user.id,
         deadline: formData.deadline ? formData.deadline : undefined,
         status: 'active',
         progress: 0,
@@ -151,22 +151,6 @@ const CreateProjectScreen = () => {
             multiline
             numberOfLines={4}
             required
-          />
-
-          <Input
-            label="Color"
-            value={formData.color}
-            onChangeText={value => handleInputChange('color', value)}
-            error={errors.color}
-            placeholder="#3B82F6"
-          />
-
-          <Input
-            label="Icon"
-            value={formData.icon}
-            onChangeText={value => handleInputChange('icon', value)}
-            error={errors.icon}
-            placeholder="📋"
           />
 
           <Input

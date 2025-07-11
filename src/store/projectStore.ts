@@ -59,14 +59,14 @@ export const useProjectStore = create<ProjectStore>()(
         
         set({ isLoading: true, error: null });
         // Ensure ownerId is present
-        if (!(projectData as any).ownerId) {
+        if (!(projectData as any).owner_id) {
           set({ isLoading: false, error: 'ownerId is required and must be a valid user ID.' });
           return { success: false, error: 'ownerId is required and must be a valid user ID.' };
         }
         try {
           const insertData = {
             ...projectData,
-            owner_id: (projectData as any).ownerId,
+            owner_id: (projectData as any).owner_id,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
             deadline: projectData.deadline ?? undefined,
@@ -124,12 +124,12 @@ export const useProjectStore = create<ProjectStore>()(
         try {
           const updateData = {
             ...updates,
-            owner_id: (updates as any).ownerId,
+            owner_id: (updates as any).owner_id,
             updated_at: new Date().toISOString(),
             deadline: updates.deadline ?? undefined,
             budget: updates.budget ?? undefined,
           };
-          delete (updateData as any).ownerId;
+          delete (updateData as any).owner_id;
           delete (updateData as any).members;
           const { data, error } = await supabase
             .from('projects')

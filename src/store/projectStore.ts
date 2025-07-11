@@ -55,6 +55,8 @@ export const useProjectStore = create<ProjectStore>()(
       error: null,
 
       createProject: async (projectData) => {
+        console.log('project data ->', projectData);
+        
         set({ isLoading: true, error: null });
         // Ensure ownerId is present
         if (!(projectData as any).ownerId) {
@@ -70,7 +72,7 @@ export const useProjectStore = create<ProjectStore>()(
             deadline: projectData.deadline ?? undefined,
             budget: projectData.budget ?? undefined,
           };
-          console.log(projectData);
+          
           
           //delete (insertData as any).ownerId;
           //delete (insertData as any).members;
@@ -93,7 +95,7 @@ export const useProjectStore = create<ProjectStore>()(
             description: data.description,
             color: data.color,
             icon: data.icon,
-            ownerId: data.owner_id,
+            owner_id: data.owner_id,
             members: [],
             createdAt: data.created_at,
             updatedAt: data.updated_at,
@@ -147,7 +149,7 @@ export const useProjectStore = create<ProjectStore>()(
             description: data.description,
             color: data.color,
             icon: data.icon,
-            ownerId: data.owner_id,
+            owner_id: data.owner_id,
             members: [],
             createdAt: data.created_at,
             updatedAt: data.updated_at,
@@ -211,7 +213,7 @@ export const useProjectStore = create<ProjectStore>()(
             description: item.description,
             color: item.color,
             icon: item.icon,
-            ownerId: item.owner_id,
+            owner_id: item.owner_id,
             members: [],
             createdAt: item.created_at,
             updatedAt: item.updated_at,
@@ -276,7 +278,7 @@ export const useProjectStore = create<ProjectStore>()(
             description: data.description,
             color: data.color,
             icon: data.icon,
-            ownerId: data.owner_id,
+            owner_id: data.owner_id,
             members,
             createdAt: data.created_at,
             updatedAt: data.updated_at,
@@ -377,7 +379,7 @@ export const useProjectStore = create<ProjectStore>()(
       },
       clearProjects: () => set({ projects: [], currentProject: null }),
       getProjectById: (id: string) => get().projects.find((p) => p.id === id),
-      getUserProjects: (userId: string) => get().projects.filter((p) => p.ownerId === userId || p.members.some((m) => m.userId === userId)),
+      getUserProjects: (userId: string) => get().projects.filter((p) => p.owner_id === userId || p.members.some((m) => m.userId === userId)),
       getProjectsByStatus: (status: Project['status']) => get().projects.filter((p) => p.status === status),
       getProjectsByPriority: (priority: Project['priority']) => get().projects.filter((p) => p.priority === priority),
       searchProjects: (query: string) => {

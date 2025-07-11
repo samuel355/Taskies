@@ -25,7 +25,7 @@ export interface Project {
   description: string;
   color: string;
   icon: string;
-  ownerId: string;
+  owner_id: string;
   members: ProjectMember[];
   createdAt: string;
   updatedAt: string;
